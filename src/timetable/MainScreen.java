@@ -2,6 +2,7 @@ package timetable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonModel;
@@ -305,14 +306,12 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jCheckBox7 = new javax.swing.JCheckBox();
-        jLabel45 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel47 = new javax.swing.JLabel();
         jButton16 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
+        jLabel51 = new javax.swing.JLabel();
+        TimeLength = new javax.swing.JComboBox<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        TimingTable = new javax.swing.JTable();
         TimeTable = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         Rooms = new javax.swing.JPanel();
@@ -659,151 +658,147 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel44.setText("Sunday");
 
-        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel45.setText("Class Timing:");
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/timetable/Icons/Add32x32.png"))); // NOI18N
+        jButton16.setText("Submit");
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jLabel51.setText("Timings:");
+
+        TimeLength.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:30 Hours", "00:45 Hours", "01:00 Hours", "01:15 Hours", "01:30 Hours", "01:45 Hours", "02:00 Hours", "02:15 Hours", "02:30 Hours", "02:45 Hours", "03:00 Hours" }));
+        TimeLength.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                TimeLengthActionPerformed(evt);
             }
         });
 
-        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel46.setText("University Timings:");
-
-        jLabel47.setText("to");
-
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/timetable/Icons/Add32x32.png"))); // NOI18N
-        jButton16.setText("Submit");
+        TimingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"09:00 To 10:30"},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Time"
+            }
+        ));
+        jScrollPane6.setViewportView(TimingTable);
 
         javax.swing.GroupLayout CalenderLayout = new javax.swing.GroupLayout(Calender);
         Calender.setLayout(CalenderLayout);
         CalenderLayout.setHorizontalGroup(
             CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CalenderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
             .addGroup(CalenderLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CalenderLayout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addGap(29, 29, 29)
                         .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CalenderLayout.createSequentialGroup()
-                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CalenderLayout.createSequentialGroup()
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel38)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jCheckBox1)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel39)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jCheckBox2)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel40)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jCheckBox3)))
-                                        .addGap(15, 15, 15)
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel41)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jCheckBox4)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel42)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addGap(3, 3, 3)
-                                                .addComponent(jCheckBox5)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel43)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jCheckBox6))))
+                                .addGap(152, 152, 152)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(CalenderLayout.createSequentialGroup()
-                                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(CalenderLayout.createSequentialGroup()
-                                                .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel47)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(TimeLength, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addGap(166, 166, 166)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel38)
+                                    .addGroup(CalenderLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jCheckBox1)))
+                                .addGap(18, 18, 18)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel39)
+                                    .addGroup(CalenderLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jCheckBox2)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel40)
+                                    .addGroup(CalenderLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jCheckBox3)))
+                                .addGap(15, 15, 15)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel41)
+                                    .addGroup(CalenderLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jCheckBox4)))
+                                .addGap(18, 18, 18)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel42)
+                                    .addGroup(CalenderLayout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jCheckBox5)))
+                                .addGap(18, 18, 18)
+                                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel43)
+                                    .addGroup(CalenderLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jCheckBox6)))
                                 .addGap(18, 18, 18)
                                 .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel44)
                                     .addGroup(CalenderLayout.createSequentialGroup()
                                         .addGap(5, 5, 5)
-                                        .addComponent(jCheckBox7)))
-                                .addContainerGap(228, Short.MAX_VALUE))
-                            .addGroup(CalenderLayout.createSequentialGroup()
-                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(jCheckBox7))))))
                     .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CalenderLayout.createSequentialGroup()
-                .addContainerGap(633, Short.MAX_VALUE)
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                        .addGap(74, 74, 74)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         CalenderLayout.setVerticalGroup(
             CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CalenderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel38)
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel38)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox1))
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox2))
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox3))
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel41)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox4))
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel42)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox5))
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel43)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox6))
+                            .addGroup(CalenderLayout.createSequentialGroup()
+                                .addComponent(jLabel44)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox7)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1))
-                    .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2))
-                    .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3))
-                    .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox4))
-                    .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel42)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox5))
-                    .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox6))
-                    .addGroup(CalenderLayout.createSequentialGroup()
-                        .addComponent(jLabel44)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox7)))
-                .addGap(38, 38, 38)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(CalenderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel47))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                        .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TimeLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -1735,7 +1730,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(CoursesPanelLayout.createSequentialGroup()
                                 .addGap(574, 574, 574)
-                                .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                                .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(33, 33, 33))))
         );
         CoursesPanelLayout.setVerticalGroup(
@@ -1783,7 +1778,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jLabel34)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1892,7 +1887,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
@@ -2029,10 +2024,6 @@ public class MainScreen extends javax.swing.JFrame {
         AddStudent.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
     private void AddStudentListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStudentListBtnActionPerformed
            StudentListing st = new StudentListing();
          st.CreateStudentListing(DepartmentsList3.getSelectedItem().toString(), SeasonsList.getSelectedItem().toString(),Integer.parseInt(YearsList.getSelectedItem().toString()), Integer.parseInt(StudentCount_AddListing.getText()),Integer.parseInt(SectionLimit_AdListing.getText()));
@@ -2091,6 +2082,28 @@ public class MainScreen extends javax.swing.JFrame {
        SeacrhTeacher(Integer.parseInt(SearchField.getText()));
     }//GEN-LAST:event_SearchBtnActionPerformed
 
+    private void TimeLengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeLengthActionPerformed
+        int a = 480 /  toMins(TimeLength.getSelectedItem().toString());
+        int start = toMins("09:00");
+        for(int i = 0;i < a;i++){
+            start += toMins(TimeLength.getSelectedItem().toString());
+            //String[] = {fromMinutesToHHmm(start)}
+          //  TimingTable.add();
+        }
+    }//GEN-LAST:event_TimeLengthActionPerformed
+
+    public String fromMinutesToHHmm(int minutes) {
+    long hours = TimeUnit.MINUTES.toHours(Long.valueOf(minutes));
+    long remainMinutes = minutes - TimeUnit.HOURS.toMinutes(hours);
+    return String.format("%02d:%02d", hours, remainMinutes);
+}
+    private static int toMins(String s) {
+    String[] hourMin = s.split(":");
+    int hour = Integer.parseInt(hourMin[0]);
+    int mins = Integer.parseInt(hourMin[1]);
+    int hoursInMins = hour * 60;
+    return hoursInMins + mins;
+}
 
     public static void main(String args[]) {
         
@@ -2187,8 +2200,10 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton TeachersBtn;
     private javax.swing.JPanel TeachersPanel;
     private javax.swing.JTable TeachersTable;
+    private javax.swing.JComboBox<String> TimeLength;
     private javax.swing.JPanel TimeTable;
     private javax.swing.JButton TimeTableBtn;
+    private javax.swing.JTable TimingTable;
     private javax.swing.JButton UpdateRoom;
     private javax.swing.JTextField UpdateRoomCountField;
     private javax.swing.JTextField UpdateRoomIDField;
@@ -2259,13 +2274,11 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2277,20 +2290,18 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextPane jTextPane1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
