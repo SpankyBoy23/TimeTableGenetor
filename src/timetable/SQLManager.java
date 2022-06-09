@@ -80,7 +80,7 @@ try{
 
  
 // Tecahers Part here:
- public void TeacherRegistory(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender,String Course,String Subject1,String Subject2,String Subject3,String Subject4){
+public void TeacherRegistory(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender,String Course,String Subject1,String Subject2,String Subject3,String Subject4){
  
      String sql=  "INSERT INTO `teacher manager`(`Name`, `CNIC`, `Phone No`, `Email`, `Address`, `DateOfBrith`, `Gender`, `Course`, `Subject1`, `Subject2`, `Subject3`, `Subject4`) VALUES ('"+name+"',"+cnic+","+phoneNo+",'"+email+"','"+Address+"','"+dOB+"','"+Gender+"','"+Course+"','"+Subject1+"','"+Subject2+"','"+Subject3+"','"+Subject4+"')";
              //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
@@ -91,7 +91,7 @@ try{
      }
              
  } 
-  public ResultSet Teachers(){
+public ResultSet Teachers(){
 
         try {
             String sql="SELECT `ID`,`Name`, `CNIC`, `Phone No`, `Email`, `DateOfBrith`, `Gender`, `Course` FROM `teacher manager`";
@@ -113,7 +113,7 @@ public ResultSet SeacrhSQLTeachers(int ID){
         }
         return rs;
 }
- public void deleteTeacher(int TeacherID){
+public void deleteTeacher(int TeacherID){
     
         try {
             String sql="delete from `teacher manager` where ID='"+TeacherID+"'";
@@ -135,9 +135,7 @@ public void UpdateTeacher(String name, long cnic, long phoneNo,String email,Stri
         }
 
 } 
- 
- 
- public ResultSet matchLoginDetails(String user, String pass){
+public ResultSet matchLoginDetails(String user, String pass){
  
    String sql="select * from user where user='"+user+"' and pass='"+pass+"'";
    try{
@@ -149,6 +147,30 @@ public void UpdateTeacher(String name, long cnic, long phoneNo,String email,Stri
  }
  
  
+public void StudentListing(String depCode,int year,String season,int ID,String section){
+ 
+     String sql=  "INSERT INTO `student manager`(`Dep Code`, `Year`, `Season`, `ID`, `Section`) VALUES ('"+depCode+"',"+year+",'"+season+"',"+ID+",'"+section+"')";
+             //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
+     try{
+     st.executeUpdate(sql);
+     }catch(SQLException e){
+     System.out.println(e);
+     }
+             
+ } 
+public ResultSet ShowStudent(){
+
+        try {
+            String sql="SELECT * FROM `student manager`";
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+           // Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        return rs;
+}
+
+
  public ResultSet DisplayUsers(){
  
    String sql="select * from user";

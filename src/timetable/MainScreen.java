@@ -18,6 +18,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         ShowRooms();
         ShowTeachersRecords();
+        ShowStudent();
         SQLManager sQLManager = new SQLManager();
         CloseAllPanels();
         Dashboard.setVisible(true);
@@ -229,6 +230,29 @@ public class MainScreen extends javax.swing.JFrame {
         UpdateRoomCountField.setText("");
     }   
    
+    
+    ///////////// Students Work
+    
+    void ShowStudent(){
+         DefaultTableModel studentTable = (DefaultTableModel)StudentTable.getModel();
+           SQLManager sqlManager = new SQLManager();
+           ResultSet rs=sqlManager.ShowStudent();
+           
+        studentTable.setNumRows(0);
+         try{
+        while(rs.next()){
+        
+        String []data={rs.getString("ID"),rs.getString("Dep Code")+"-"+String.valueOf(rs.getString("Year")).substring(2)+rs.getString("Season")+"-"+String.format("%03d",Integer.parseInt(rs.getString("ID"))),rs.getString("Section")};
+        studentTable.addRow(data);
+        
+        }
+        }catch(SQLException e){
+        System.out.println(e);
+        }
+         
+         
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1045,7 +1069,7 @@ public class MainScreen extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "#", "ID", "Department", "Section"
+                "#", "ID", "Section", "Department"
             }
         ) {
             Class[] types = new Class [] {
@@ -1069,8 +1093,8 @@ public class MainScreen extends javax.swing.JFrame {
             StudentTable.getColumnModel().getColumn(0).setPreferredWidth(10);
             StudentTable.getColumnModel().getColumn(1).setResizable(false);
             StudentTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-            StudentTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-            StudentTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            StudentTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            StudentTable.getColumnModel().getColumn(3).setPreferredWidth(200);
         }
 
         jButton5.setText("Add New Listing ");
@@ -2012,11 +2036,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void AddStudentListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStudentListBtnActionPerformed
            StudentListing st = new StudentListing();
          st.CreateStudentListing(DepartmentsList3.getSelectedItem().toString(), SeasonsList.getSelectedItem().toString(),Integer.parseInt(YearsList.getSelectedItem().toString()), Integer.parseInt(StudentCount_AddListing.getText()),Integer.parseInt(SectionLimit_AdListing.getText()));
-          DefaultTableModel tableModel = (DefaultTableModel)StudentTable.getModel();
-           for(String[] ls:st.list){
-           
-                tableModel.addRow(ls);
-                }
+          ShowStudent();
            CloseAllPanels();
            Students.setVisible(true);
     }//GEN-LAST:event_AddStudentListBtnActionPerformed
