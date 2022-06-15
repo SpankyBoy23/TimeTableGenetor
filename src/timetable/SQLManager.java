@@ -15,13 +15,57 @@ try{
      Class.forName("com.mysql.cj.jdbc.Driver");
      con=DriverManager.getConnection("jdbc:mysql://localhost:3306/timetabledatabase", "root","");
      st=con.createStatement();
+     System.out.println("Connection Successfull.");
      
 }catch(ClassNotFoundException | SQLException e){
    System.out.println(e);
 } 
  }
  
- 
+ public void AddDepartment(String Name,String Code){
+     String sql=  "INSERT INTO `departments`(`Name`, `Code`) VALUES ('"+Name+"','"+Code+"')";
+     
+             //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
+     try{
+     st.executeUpdate(sql);
+     JOptionPane.showMessageDialog(null,"Department Added Successfully");
+     }catch(SQLException e){
+     System.out.println(e);
+     }
+ }
+ public ResultSet GetDepartments(){
+     
+      try {
+            String sql="SELECT * FROM `departments`";
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+           // Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+     return rs;
+ }
+  public ResultSet GetDepartmentBName(String Name){
+     
+      try {
+            String sql="SELECT `Dep_ID` FROM `departments` WHERE `Name` = '"+Name+"'";
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+           // Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+     return rs;
+ }
+  public void AddSubject(int Id,String Name,String Code){
+     String sql=  "INSERT INTO `subjects`(Dep_ID,`Name`, `Code`) VALUES ("+Id+",'"+Name+"','"+Code+"')";
+     
+             //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
+     try{
+     st.executeUpdate(sql);
+     JOptionPane.showMessageDialog(null,"Subject Added Successfully");
+     }catch(SQLException e){
+     System.out.println(e);
+     }
+ }
  public void RoomsRegistory(String department, String buildingID, String capcity){
  
      String sql=  "INSERT INTO `rooms manager`(`Department`, `Building ID`, `Capacity`) VALUES ('"+department+"','"+buildingID+"','"+capcity+"')";
@@ -80,9 +124,9 @@ try{
 
  
 // Tecahers Part here:
-public void TeacherRegistory(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender,String Course,String Subject1,String Subject2,String Subject3,String Subject4){
+public void TeacherRegistory(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender){
  
-     String sql=  "INSERT INTO `teacher manager`(`Name`, `CNIC`, `Phone No`, `Email`, `Address`, `DateOfBrith`, `Gender`, `Course`, `Subject1`, `Subject2`, `Subject3`, `Subject4`) VALUES ('"+name+"',"+cnic+","+phoneNo+",'"+email+"','"+Address+"','"+dOB+"','"+Gender+"','"+Course+"','"+Subject1+"','"+Subject2+"','"+Subject3+"','"+Subject4+"')";
+     String sql=  "INSERT INTO `teacher manager`(`Name`, `CNIC`, `Phone No`, `Email`, `Address`, `DateOfBrith`, `Gender`) VALUES ('"+name+"',"+cnic+","+phoneNo+",'"+email+"','"+Address+"','"+dOB+"','"+Gender+"')";
              //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
      try{
      st.executeUpdate(sql);
@@ -124,10 +168,10 @@ public void deleteTeacher(int TeacherID){
             System.out.println("Error While Deleting room "+ ex);
         }
 }
-public void UpdateTeacher(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender,String Course,String Subject1,String Subject2,String Subject3,String Subject4,int ID){
+public void UpdateTeacher(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender,int ID){
 
         try {
-            String sql= "UPDATE `rooms manager` SET `Name`='"+name+"',`CNIC`= "+cnic+",`Phone No`= "+phoneNo+",`Email`='"+email+"',`Address`='"+Address+"',`DateOfBrith`='"+dOB+"',`Gender`='"+Gender+"',`Course`='"+Course+"',`Subject1`='"+Subject1+"',`Subject2`='"+Subject2+"',`Subject3`='"+Subject3+"',`Subject4`='"+Subject4+"'  WHERE `ID` = "+ID+")";
+            String sql= "UPDATE `rooms manager` SET `Name`='"+name+"',`CNIC`= "+cnic+",`Phone No`= "+phoneNo+",`Email`='"+email+"',`Address`='"+Address+"',`DateOfBrith`='"+dOB+"',`Gender`='"+Gender+"' WHERE `ID` = "+ID+")";
             
             st.executeUpdate(sql);
         } catch (SQLException ex) {
