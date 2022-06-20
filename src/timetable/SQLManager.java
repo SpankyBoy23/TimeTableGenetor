@@ -44,7 +44,7 @@ try{
         }
      return rs;
  }
-  public ResultSet GetDepartmentBName(String Name){
+ public ResultSet GetDepartmentBName(String Name){
      
       try {
             String sql="SELECT `Dep_ID` FROM `departments` WHERE `Name` = '"+Name+"'";
@@ -55,7 +55,7 @@ try{
         }
      return rs;
  }
-  public void AddSubject(int Id,String Name,String Code){
+ public void AddSubject(int Id,String Name,String Code){
      String sql=  "INSERT INTO `subjects`(Dep_ID,`Name`, `Code`) VALUES ("+Id+",'"+Name+"','"+Code+"')";
      
              //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
@@ -66,6 +66,52 @@ try{
      System.out.println(e);
      }
  }
+  
+  
+   public void AddAllocation(String Name,String Department,String Subject,boolean secA,boolean secB,boolean secC,boolean secD) {
+       
+       String checkSql = "SELECT * FROM `allocation manager`";
+     
+     String sql=  "INSERT INTO `allocation manager`(`T_Name`, `Department`,`Subject`, `SecA`, `SecB`, `SecC`, `SecD`) VALUES ('"+Name+"','"+Department+"','"+Subject+"',"+secA+","+secB+","+secC+","+secD+")";
+     
+             //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
+     try{
+         rs = st.executeQuery(checkSql);
+       while(rs.next()){
+           
+           System.out.println(rs.getString("T_Name"));
+           if(Name.equals(rs.getString("T_Name"))){
+               if(Department.equals(rs.getString("Department"))){
+                   sql = "UPDATE `allocation manager` SET `Subject` ='"+Subject+"', `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE `T_Name` = '"+Name+"' AND `Department` = '"+Department+"'";
+                    if(Subject.equals(rs.getString("Subject"))){
+                        sql = "UPDATE `allocation manager` SET  `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE `T_Name` = '"+Name+"' AND `Department` = '"+Department+"' AND `Subject` ='"+Subject+"'";
+                    }
+               }
+                  
+               sql = "UPDATE `allocation manager` SET `Department`= '"+Department+"',`Subject` ='"+Subject+"', `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE `T_Name` = '"+Name+"'";
+               break;
+           }
+       }
+         st.executeUpdate(sql);
+        JOptionPane.showMessageDialog(null,"Allocated Successfully","Allocated" , 1);
+     }catch(SQLException e){
+         System.out.println(e);
+     }
+ }
+  
+  
+ public ResultSet GetSubjectByName(int id){
+     
+      try {
+            String sql="SELECT `Name` FROM `subjects` WHERE `Dep_ID` = "+id+"";
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+           // Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+     return rs;
+ } 
+  
  public void RoomsRegistory(String department, String buildingID, String capcity){
  
      String sql=  "INSERT INTO `rooms manager`(`Department`, `Building ID`, `Capacity`) VALUES ('"+department+"','"+buildingID+"','"+capcity+"')";
@@ -179,13 +225,13 @@ public void UpdateTeacher(String name, long cnic, long phoneNo,String email,Stri
         }
 
 } 
-public ResultSet matchLoginDetails(String user, String pass){
+public ResultSet MatchLoginDetails(String user, String pass){
  
-   String sql="select * from user where user='"+user+"' and pass='"+pass+"'";
+   String sql="SELECT `UserName`, `Password` FROM `loginmanager` WHERE `UserName` = '"+user+"' AND `Password` = '"+pass+"'";
    try{
    rs=st.executeQuery(sql);
-   }catch(Exception e){
-   System.out.println(e);
+   }catch(SQLException e){
+   System.out.println("Login Error: "+ e);
    }
    return rs;
  }
