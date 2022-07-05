@@ -184,10 +184,14 @@ public class LoginPanel extends javax.swing.JFrame {
         ResultSet rs = sql.MatchLoginDetails(UserNameField.getText(), PasswordField.getText());
         
         try {
-            rs.next();
-           JOptionPane.showMessageDialog(null,"Wellcome","Login" , 1);
-           new LoadingPanel().setVisible(true);
-           dispose();
+            if(rs.next()){
+            
+            JOptionPane.showMessageDialog(null,"Wellcome","Login" , 1);
+            new LoadingPanel().setVisible(true);
+            dispose();}
+            else{
+                JOptionPane.showMessageDialog(null,"Wrong Username or Password","Error!" , 2);
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"No User Found","Error!" , 2);
         }

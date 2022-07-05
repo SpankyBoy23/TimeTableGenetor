@@ -1,6 +1,7 @@
 package timetable;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -66,36 +67,67 @@ try{
      System.out.println(e);
      }
  }
+ public ResultSet DepartmentCount(){
+     String sql = "SELECT COUNT(*) FROM `departments`";
+        try {
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return rs;
+ }
   
-  
-   public void AddAllocation(String Name,String Department,String Subject,boolean secA,boolean secB,boolean secC,boolean secD) {
-       
+    ArrayList<String> Subjects;
+    public ResultSet Allocation(String Name){
+        String checkSql = "SELECT  `Subject#1`, `Subject#2`, `Subject#3`, `Subject#4`, `Subject#5`, `Subject#6`, `Subject#7` FROM `allocation manager` WHERE `T_Name` = '"+Name+"'";
+        
+        try {
+            // Name.equals(rs.getString("T_Name")
+            rs = st.executeQuery(checkSql);
+        } catch (SQLException ex) {
+            System.out.println("Info Not Found!");
+            return null;
+        }
+       return rs;
+    }
+    public ResultSet GetAllocation(){
+        String checkSql = "SELECT  * FROM `allocation manager`";
+        
+        try {
+            // Name.equals(rs.getString("T_Name")
+            rs = st.executeQuery(checkSql);
+        } catch (SQLException ex) {
+            System.out.println("Info Not Found!");
+            return null;
+        }
+       return rs;
+    }
+   public void AddAllocation(String Name,String Subject1,String Subject2,String Subject3,String Subject4,String Subject5,String Subject6,String Subject7) {
+        
        String checkSql = "SELECT * FROM `allocation manager`";
      
-     String sql=  "INSERT INTO `allocation manager`(`T_Name`, `Department`,`Subject`, `SecA`, `SecB`, `SecC`, `SecD`) VALUES ('"+Name+"','"+Department+"','"+Subject+"',"+secA+","+secB+","+secC+","+secD+")";
-     
+     String sql=  "INSERT INTO `allocation manager`(`T_Name`, `Subject#1`, `Subject#2`, `Subject#3`, `Subject#4`, `Subject#5`, `Subject#6`, `Subject#7`) VALUES ('"+Name+"','"+Subject1+"','"+Subject2+"','"+Subject3+"','"+Subject4+"','"+Subject5+"','"+Subject6+"','"+Subject7+"')";
+       //System.out.println("INSERT INTO `allocation manager`(`T_Name`, `Department`, `Subject#1`, `Subject#2`, `Subject#3`, `Subject#4`, `Subject#5`, `Subject#6`, `Subject#7`) VALUES ('"+Name+"','"+Department+"','"+Subject1+"','"+Subject2+"','"+Subject3+"','"+Subject4+"','"+Subject5+"','"+Subject6+"','"+Subject7+"')");
              //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
      try{
          rs = st.executeQuery(checkSql);
-       while(rs.next()){
-           
-           System.out.println(rs.getString("T_Name"));
+         //if(rs.next()){
+      while(rs.next()){
            if(Name.equals(rs.getString("T_Name"))){
-               if(Department.equals(rs.getString("Department"))){
-                   sql = "UPDATE `allocation manager` SET `Subject` ='"+Subject+"', `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE `T_Name` = '"+Name+"' AND `Department` = '"+Department+"'";
-                    if(Subject.equals(rs.getString("Subject"))){
-                        sql = "UPDATE `allocation manager` SET  `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE `T_Name` = '"+Name+"' AND `Department` = '"+Department+"' AND `Subject` ='"+Subject+"'";
-                    }
-               }
-                  
-               sql = "UPDATE `allocation manager` SET `Department`= '"+Department+"',`Subject` ='"+Subject+"', `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE `T_Name` = '"+Name+"'";
+               // System.out.println(rs.getString("T_Name"));
+              // sql=  "INSERT INTO `allocation manager`(`T_Name`, `Subject#1`, `Subject#2`, `Subject#3`, `Subject#4`, `Subject#5`, `Subject#6`, `Subject#7`) VALUES ('"+Name+"','"+Subject1+"''"+Subject2+"','"+Subject3+"','"+Subject4+"','"+Subject5+"','"+Subject6+"','"+Subject7+"')"; 
+                 //  System.out.println(Subjects);
+               
+                   sql = "UPDATE `allocation manager` SET `Subject#1`='"+Subject1+"',`Subject#2`='"+Subject2+"',`Subject#3`='"+Subject3+"',`Subject#4`='"+Subject4+"',`Subject#5`='"+Subject5+"',`Subject#6`='"+Subject6+"',`Subject#7`='"+Subject7+"' WHERE `T_Name` = '"+Name+"' ";
+                   
+                          // "UPDATE `allocation manager` SET `Subject` ='"+Subject+"', `SecA`="+secA+", `SecB`="+secB+", `SecC`="+secC+", `SecD`="+secD+" WHERE  
                break;
            }
-       }
+      }System.out.println(sql);
          st.executeUpdate(sql);
         JOptionPane.showMessageDialog(null,"Allocated Successfully","Allocated" , 1);
      }catch(SQLException e){
-         System.out.println(e);
+         System.out.println("Insert Error: "+e);
      }
  }
   
@@ -111,7 +143,17 @@ try{
         }
      return rs;
  } 
-  
+  public ResultSet GetSubjectBySemster(int Semster){
+     
+      try {
+            String sql="SELECT `Name` FROM `subjects` WHERE `Semster` = "+Semster+"";
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+           // Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+     return rs;
+ }  
  public void RoomsRegistory(String department, String buildingID, String capcity){
  
      String sql=  "INSERT INTO `rooms manager`(`Department`, `Building ID`, `Capacity`) VALUES ('"+department+"','"+buildingID+"','"+capcity+"')";
@@ -167,13 +209,22 @@ try{
         }
 
 }
-
+public ResultSet RoomCount(){
+    String sql = "SELECT COUNT(*) FROM `rooms manager`";
+        try {
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return rs;
+} 
  
 // Tecahers Part here:
 public void TeacherRegistory(String name, long cnic, long phoneNo,String email,String Address,String dOB,String Gender){
  
      String sql=  "INSERT INTO `teacher manager`(`Name`, `CNIC`, `Phone No`, `Email`, `Address`, `DateOfBrith`, `Gender`) VALUES ('"+name+"',"+cnic+","+phoneNo+",'"+email+"','"+Address+"','"+dOB+"','"+Gender+"')";
              //"insert into rooms Mana (user,pass, email)values('"+department+"','"+buildingID+"','"+capcity+"')";
+             JOptionPane.showMessageDialog(null,"Teacher Registored.","Successfull" , 1);
      try{
      st.executeUpdate(sql);
      }catch(SQLException e){
@@ -184,11 +235,11 @@ public void TeacherRegistory(String name, long cnic, long phoneNo,String email,S
 public ResultSet Teachers(){
 
         try {
-            String sql="SELECT `ID`,`Name`, `CNIC`, `Phone No`, `Email`, `DateOfBrith`, `Gender`, `Course` FROM `teacher manager`";
+            String sql="SELECT `ID`,`Name`,`CNIC`, `Phone No`, `Email`, `DateOfBrith`, `Gender` FROM `teacher manager`";
             rs=st.executeQuery(sql);
         } catch (SQLException ex) {
            // Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
+            System.out.println("sds"+ex);
         }
         return rs;
 }
@@ -229,13 +280,21 @@ public ResultSet MatchLoginDetails(String user, String pass){
  
    String sql="SELECT `UserName`, `Password` FROM `loginmanager` WHERE `UserName` = '"+user+"' AND `Password` = '"+pass+"'";
    try{
-   rs=st.executeQuery(sql);
+   rs = st.executeQuery(sql);
    }catch(SQLException e){
    System.out.println("Login Error: "+ e);
    }
    return rs;
  }
- 
+public ResultSet TeachersCount(){
+    String sql = "SELECT COUNT(*) FROM `teacher manager`";
+        try {
+            rs=st.executeQuery(sql);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return rs;
+} 
  
 public void StudentListing(String depCode,int year,String season,int ID,String section){
  
@@ -259,8 +318,6 @@ public ResultSet ShowStudent(){
         }
         return rs;
 }
-
-
  public ResultSet DisplayUsers(){
  
    String sql="select * from user";
@@ -283,8 +340,6 @@ public ResultSet searchUser(String search){
    }
    return rs;  
  }
- 
-
 public ResultSet displayStudentsData(){
 
         try {
